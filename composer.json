@@ -1,0 +1,16 @@
+{
+    "name": "brayan/sis-adm",
+    "description": "Sistema administrativo com níveis de acesso.",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Brayan Monteiro",
+            "email": "brayanmonteirooo@gmail.com"
+        }
+    ],
+    "require": {}
+}
