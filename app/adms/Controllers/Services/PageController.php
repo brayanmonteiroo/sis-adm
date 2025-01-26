@@ -2,6 +2,8 @@
 
 namespace App\adms\Controllers\Services;
 
+use App\adms\Helpers\ClearUrl;
+
 /**
  * Recebe a URL e manipula
  * 
@@ -16,7 +18,7 @@ class PageController
     // Método construtor: significa que toda vez que a classe for instanciada, o método será executado. Recebe a URL do .htaccess.
     public function __construct()
     {
-        echo 'PageController <br>';
+        echo 'Teste PageController <br>';
 
         // Verifica se vem valor na variável url enviada pelo .htaccess
         if (!empty(filter_input(INPUT_GET, 'url', FILTER_DEFAULT))){
@@ -24,6 +26,10 @@ class PageController
             $this->url = filter_input(INPUT_GET, 'url', FILTER_DEFAULT);
 
             echo "Acessar o endereço: " . $this->url . "<br>";
+            
+            // Chamar a classe helper para limpar a url
+            $this->url = ClearUrl::clearUrl($this->url);
+            var_dump($this->url);
         }else{
             echo "Acessar a página inicial";
         }
