@@ -1,0 +1,18 @@
+# Documentação: https://httpd.apache.org/docs/2.4/howto/htaccess.html
+
+# Ativa o mecanismo de reescrita de URLs no servidor Apache.
+RewriteEngine On
+
+# Verifica se o caminho requisitado não é um arquivo.
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Verifica se o caminho requisitado não é um arquivo.
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Verifica se o caminho requisitado não é um link simbólico.
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Redireciona todas as requisições que atendem às condições acima para o arquivo index.php, passando a URL original como parâmetro url.
+# QSA: Preserva os parâmetros da query string na URL.
+# L: Indica que esta é a última regra a ser processada, interrompendo outras regras se esta for aplicada.
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
