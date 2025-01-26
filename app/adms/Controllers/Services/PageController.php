@@ -13,6 +13,6 @@ class PageController
     // Método construtor: significa que toda vez que a classe for instanciada, o método será executado.
     public function __construct()
     {
-        echo 'PageController';
+        echo 'PageController teste';
     }
 }
