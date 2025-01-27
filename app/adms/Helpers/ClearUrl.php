@@ -9,16 +9,18 @@ namespace App\adms\Helpers;
  *
  */
 
- class ClearUrl 
- {
+ class ClearUrl
+{
 
     /**
-     * Método estático pode ser chamado diretamente na classe sem precisar instanciar objetos da classe.
-     * Limpara a url, eliminando caracteres especiais, espaços, as tags e a barra no final.
+     * Método estático pode ser chamado diretamente na classe, sem a necessidade de criar uma instância (objeto) da classe.  
+     * Limpara a URL, elimando as TAG, os espaços em brancos, retirar a barra no final da URL e retirar os caracteres especiais
+     *
      * @return string
      */
     public static function clearUrl(string $url): string
     {
+
         // Eliminar a barra no final da URL
         $url = rtrim($url, "/");
 
@@ -38,8 +40,7 @@ namespace App\adms\Helpers;
 
         // Substituir os caracteres não aceitos pelos caracteres aceitos
         return str_replace(mb_convert_encoding($unaccepted_characters, 'ISO-8859-1', 'UTF-8'), $accepted_characters, mb_convert_encoding($url, 'ISO-8859-1', 'UTF-8'));
+        
     }
 
-
-
- }
+}

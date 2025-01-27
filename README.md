@@ -1,3 +1,7 @@
+## Glossário 
+adms = administrativo
+sts = sites
+
 ## Requisitos
 
 * PHP 8.3 ou superior;

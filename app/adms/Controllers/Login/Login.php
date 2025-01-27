@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\adms\Controllers\Login;
+namespace App\adms\Controllers\login;
 
 class Login
 {

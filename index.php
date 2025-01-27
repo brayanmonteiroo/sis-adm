@@ -2,8 +2,11 @@
 
 use App\adms\Controllers\Services\PageController;
 
-// Carregar o composer: responsável por carregar as classes
-require 'vendor/autoload.php';
+// Carregar o Composer
+require './vendor/autoload.php';
 
-// instanciar a classe PageController, responsável por manipular a URL
+// Instanciar a classe PageController, responsável em tratar a URL
 $url = new PageController();
+
+// Chamar o método para carregar a página/controller
+$url->loadPage();

@@ -13,54 +13,67 @@ use App\adms\Helpers\SlugController;
  */
 class PageController
 {
-    /** @var string Atributo que recebe a URL do .htaccess  */
+    /** @var string $url Recebe a URL do .htaccess */
     private string $url;
 
-    /** @var array Atributo que recebe a URL convertida em array */
+    /** @var array $urlArray Recebe a URL convertida para array */
     private array $urlArray;
 
-    /** @var string Atributo que recebe o controller da URL */
+    /** @var string $urlController Recebe da URL o nome da controller */
     private string $urlController = "";
 
-    /** @var string Atributo que recebe o parâmetro da URL */
-    private string $urlParamater = "";
+    /** @var string $urlParameter Recebe da URL o parâmetro */
+    private string $urlParameter = "";
 
-    // Método construtor: significa que toda vez que a classe for instanciada, o método será executado. Recebe a URL do .htaccess.
+    /**
+     * Recebe a URL do .htaccess
+     */
     public function __construct()
     {
-        echo 'Teste PageController <br>';
 
-        // Verifica se vem valor na variável url enviada pelo .htaccess
-        if (!empty(filter_input(INPUT_GET, 'url', FILTER_DEFAULT))){
-            // Recebe a URL do .htaccess
+        // Verificar se vem valor na variável url enviada pelo .htaccess
+        if (!empty(filter_input(INPUT_GET, 'url', FILTER_DEFAULT))) {
+
+            // Receber o valor da variável url enviada pelo .htaccess
             $this->url = filter_input(INPUT_GET, 'url', FILTER_DEFAULT);
 
-            echo "Acessar o endereço: " . $this->url . "<br>";
-            
-            // Chamar a classe helper para limpar a url
+            // Chamar a classe helper para limpar a URL
             $this->url = ClearUrl::clearUrl($this->url);
-            var_dump($this->url);
 
-            //Converter a string URL em um array
-            $this->urlArray = explode('/', $this->url);
-            var_dump($this->urlArray);
+            // Converter a string da URL em array
+            $this->urlArray  = explode("/", $this->url);
 
-            // Verificar se o array não está vazio e se o primeiro índice do array não está vazio.
-            if (isset($this->urlArray[0])){
+            // Verificar se existe a controller na URL
+            if (isset($this->urlArray[0])) {
+                // Chamar a classe helper para converter a controller enviada na URL para o formato da classe
                 $this->urlController = SlugController::slugController($this->urlArray[0]);
-            }else{
-                $this->urlController = SlugController::slugController("Login");
+            } else {
+                $this->urlController = SlugController::slugController("login");
             }
 
-            // Verificar se o array não está vazio e se o segundo índice do array não está vazio.
-            if (isset($this->urlArray[1])){
-                $this->urlParamater = $this->urlArray[1];
-            }
+            // Verificar se existe o parâmetro na URL
+            if (isset($this->urlArray[1])) {
+                $this->urlParameter = $this->urlArray[1];
+            } 
 
-        }else{
-            $this->urlController = SlugController::slugController("Login");
+        } else {
+            $this->urlController = SlugController::slugController("login");
         }
-        var_dump($this->urlController);
-        var_dump($this->urlParamater);
+    }
+
+    /**
+     * Carregar página/controller 
+     * Instanciar a classe para validar e carregar página/controller 
+     *
+     * @return void
+     */
+    public function loadPage(): void
+    {
+        
+        // Instanciar a classe para validar e carregar página/controller 
+        $loadPageAdm = new LoadPageAdm();
+
+        // Chamar o método e enviar como parâmetro a controller e o parâmentro da URL
+        $loadPageAdm->loadPageAdm($this->urlController, $this->urlParameter);
     }
 }
